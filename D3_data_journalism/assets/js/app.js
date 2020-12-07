@@ -33,6 +33,25 @@ var chartGroup = svg.append("g")
 d3.csv("assets/data/data.csv").then(function(importedData) {
     console.log(importedData);
 
+    // Parse data
+    importedData.forEach(data => {
+      abbr = data.abbr;
+      poverty = +data.poverty;
+      age = +data.age;
+      income = +data.income;
+      healthcare = +data.healthcare;
+      obesity = +data.obesity;
+      smokes = +data.Ssmokes;
+    });
+
+    var xLinearScale = d3.scaleLinear()
+    .domain(d3.extent(importedData, d => d.poverty))
+    .range([0, chartWidth]);
+
+    var yLinearScale = d3.scaleLinear()
+    .domain([0, d3.max(importedData, d => d.healthcare)])
+    .range([chartHeight, 0]);
+
     
 
 });
