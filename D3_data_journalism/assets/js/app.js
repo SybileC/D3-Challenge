@@ -63,8 +63,8 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .range([0, chartWidth]);
 
     var yLinearScale = d3.scaleLinear()
-    // .domain([d3.min(importedData, d => d.healthcare), d3.max(importedData, d => d.healthcare)])
-    .domain(d3.extent(importedData, d => d.healthcare))
+    .domain([0, d3.max(importedData, d => d.healthcare)])
+    // .domain(d3.extent(importedData, d => d.healthcare))
     .range([chartHeight, 0]);
     // .range([0, chartHeight]);
 
@@ -88,7 +88,8 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
     .attr("fill", "blue")
-    .attr("opacity", ".5");
+    .attr("opacity", ".5")
+    .text(d => d.abbr);
 
     // chartGroup.append("text")
     // .attr("dx", function(d){return -20})
