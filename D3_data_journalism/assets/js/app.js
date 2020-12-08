@@ -32,6 +32,8 @@ var chartGroup = svg.append("g")
 // Load data from data.csv
 d3.csv("assets/data/data.csv").then(function(importedData) {
       console.log(importedData);
+      
+      // Parse data
       var abbr = importedData.map(d => d.abbr);
       console.log("this is abbr");
       console.log(abbr);
@@ -54,50 +56,42 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       console.log("this is smokes");
       console.log(smokes);
 
-    // Parse data
-    // importedData.map(function(data) {
-    //   abbr = data.abbr;
-    //   poverty = +data.poverty;
-    //   age = +data.age;
-    //   income = +data.income;
-    //   healthcare = +data.healthcare;
-    //   obesity = +data.obesity;
-    //   smokes = +data.smokes;
-    // });
 
-    // console.log(smokes);
-    // console.log(abbr);
-
-    // var xLinearScale = d3.scaleLinear()
-    // .domain(d3.extent(importedData, d => d.poverty))
-    // .range([0, chartWidth]);
-
-    // var yLinearScale = d3.scaleLinear()
+    var xLinearScale = d3.scaleLinear()
+    .domain(d3.extent(importedData, d => d.income))
     // .domain([0, d3.max(importedData, d => d.healthcare)])
-    // .range([chartHeight, 0]);
+    .range([0, chartWidth]);
 
-    // var bottomAxis = d3.axisBottom(xLinearScale);
-    // var leftAxis = d3.axisLeft(yLinearScale);
+    var yLinearScale = d3.scaleLinear()
+    .domain([20, d3.max(importedData, d => d.healthcare)])
+    // .domain(d3.extent(importedData, d => d.healthcare))
+    .range([chartHeight, 0]);
+    // .range([0, chartHeight]);
 
-    // chartGroup.append("g")
-    //   .attr("transform", `translate(0, ${chartHeight})`)
-    //   .call(bottomAxis);
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
 
-    // chartGroup.append("g")
-    //   .call(leftAxis);
+    chartGroup.append("g")
+      .attr("transform", `translate(0, ${chartHeight})`)
+      .call(bottomAxis);
 
-    // // Step 5: Create Circles
-    // // ==============================
-    // var circlesGroup = chartGroup.selectAll("circle")
-    // .data(importedData)
-    // .enter()
-    // .append("circle")
-    // // .classed("scatter")
-    // .attr("cx", d => xLinearScale(d.poverty))
-    // .attr("cy", d => yLinearScale(d.healthcare))
-    // .attr("r", "15")
-    // .attr("fill", "blue")
-    // .attr("opacity", ".5");
+    chartGroup.append("g")
+      .call(leftAxis);
 
+    // Create circles
+    var circlesGroup = chartGroup.selectAll("#scatter")
+    .data(importedData)
+    .enter()
+    .append("circle")
+    .classed("scatter", true)
+    .attr("cx", d => xLinearScale(d.income))
+    .attr("cy", d => yLinearScale(d.healthcare))
+    .attr("r", "15")
+    .attr("fill", "blue")
+    .attr("opacity", ".5");
+
+    // chartGroup.append("text")
+    // .attr("dx", function(d){return -20})
+    // .text(function(d){return d.abbr})
 
 });
