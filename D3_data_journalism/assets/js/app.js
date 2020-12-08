@@ -44,14 +44,38 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       smokes = +data.Ssmokes;
     });
 
-    var xLinearScale = d3.scaleLinear()
-    .domain(d3.extent(importedData, d => d.poverty))
-    .range([0, chartWidth]);
+    console.log(smokes);
 
-    var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(importedData, d => d.healthcare)])
-    .range([chartHeight, 0]);
+    // var xLinearScale = d3.scaleLinear()
+    // .domain(d3.extent(importedData, d => d.poverty))
+    // .range([0, chartWidth]);
 
-    
+    // var yLinearScale = d3.scaleLinear()
+    // .domain([0, d3.max(importedData, d => d.healthcare)])
+    // .range([chartHeight, 0]);
+
+    // var bottomAxis = d3.axisBottom(xLinearScale);
+    // var leftAxis = d3.axisLeft(yLinearScale);
+
+    // chartGroup.append("g")
+    //   .attr("transform", `translate(0, ${chartHeight})`)
+    //   .call(bottomAxis);
+
+    // chartGroup.append("g")
+    //   .call(leftAxis);
+
+    // // Step 5: Create Circles
+    // // ==============================
+    // var circlesGroup = chartGroup.selectAll("circle")
+    // .data(importedData)
+    // .enter()
+    // .append("circle")
+    // // .classed("scatter")
+    // .attr("cx", d => xLinearScale(d.poverty))
+    // .attr("cy", d => yLinearScale(d.healthcare))
+    // .attr("r", "15")
+    // .attr("fill", "blue")
+    // .attr("opacity", ".5");
+
 
 });
