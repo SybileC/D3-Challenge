@@ -30,21 +30,25 @@ var chartGroup = svg.append("g")
 
 
 // Load data from data.csv
-d3.csv("assets/data/data.csv").then(function(importedData) {
-    console.log(importedData);
+d3.csv("assets/data/data.csv").then(function(importedData) {
+      console.log(importedData);
+      var smokes = importedData.map(d => d.smokes);
+      console.log("this is smokes");
+      console.log(smokes);
 
     // Parse data
-    importedData.forEach(data => {
-      abbr = data.abbr;
-      poverty = +data.poverty;
-      age = +data.age;
-      income = +data.income;
-      healthcare = +data.healthcare;
-      obesity = +data.obesity;
-      smokes = +data.Ssmokes;
-    });
+    // importedData.map(function(data) {
+    //   abbr = data.abbr;
+    //   poverty = +data.poverty;
+    //   age = +data.age;
+    //   income = +data.income;
+    //   healthcare = +data.healthcare;
+    //   obesity = +data.obesity;
+    //   smokes = +data.smokes;
+    // });
 
-    console.log(smokes);
+    // console.log(smokes);
+    // console.log(abbr);
 
     // var xLinearScale = d3.scaleLinear()
     // .domain(d3.extent(importedData, d => d.poverty))
