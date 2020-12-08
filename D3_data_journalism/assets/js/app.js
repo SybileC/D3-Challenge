@@ -63,8 +63,8 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .range([0, chartWidth]);
 
     var yLinearScale = d3.scaleLinear()
-    .domain([20, d3.max(importedData, d => d.healthcare)])
-    // .domain(d3.extent(importedData, d => d.healthcare))
+    // .domain([d3.min(importedData, d => d.healthcare), d3.max(importedData, d => d.healthcare)])
+    .domain(d3.extent(importedData, d => d.healthcare))
     .range([chartHeight, 0]);
     // .range([0, chartHeight]);
 
