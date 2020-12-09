@@ -60,13 +60,13 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
 
 
     var xLinearScale = d3.scaleLinear()
-    .domain([5, d3.max(importedData, d => d.poverty)])
+    .domain([5, d3.max(importedData, d => d.poverty + 2)])
     // .domain([0, d3.max(importedData, d => d.healthcare)])
     .range([0, chartWidth]);
 
     var yLinearScale = d3.scaleLinear()
     // .domain([0, 33])
-    .domain([0, d3.max(importedData, d => d.healthcare)])
+    .domain([0, d3.max(importedData, d => d.healthcare + 2)])
     // .domain(d3.extent(importedData, d => d.healthcare))
     .range([chartHeight, 0]);
     // .range([0, chartHeight]);
