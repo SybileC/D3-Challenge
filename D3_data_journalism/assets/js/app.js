@@ -5,18 +5,20 @@ var svgWidth = 960;
 var svgHeight = 660;
 
 // Define the chart's margins as an object
+// 
+
 var chartMargin = {
-  top: 30,
-  right: 30,
-  bottom: 30,
-  left: 30
+  top: 100,
+  right: 100,
+  bottom: 100,
+  left: 100
 };
 
-// Define dimensions of the chart area
+// Define chart area dimensions
 var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
-// Select scatter id, append SVG area to it, and set the dimensions
+// Select scatter id, append SVG area to id, and set dimensions
 var svg = d3
   .select("#scatter")
   .append("svg")
@@ -60,19 +62,13 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
 
 
     var xLinearScale = d3.scaleLinear()
-    .domain([5, d3.max(importedData, d => d.poverty + 2)])
-    // .domain([0, d3.max(importedData, d => d.healthcare)])
+    .domain([8, d3.max(importedData, d => d.poverty + 2)])
     .range([0, chartWidth]);
 
     var yLinearScale = d3.scaleLinear()
-    // .domain([0, 33])
     .domain([0, d3.max(importedData, d => d.healthcare + 2)])
-    // .domain(d3.extent(importedData, d => d.healthcare))
     .range([chartHeight, 0]);
-    // .range([0, chartHeight]);
-    // .range([chartHeight - chartMargin.bottom, chartMargin.top]
 
-    // console.log(d3.max(d.healthcare));
     
     var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
@@ -85,7 +81,7 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       .call(leftAxis);
 
     // Create circles
-    var circlesGroup = chartGroup.selectAll("#scatter")
+    chartGroup.selectAll("#scatter")
     .data(importedData)
     .enter()
     .append("circle")
@@ -95,8 +91,8 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .attr("r", "15")
     .attr("fill", "green")
     .attr("opacity", ".5");
-    // .text(function(d) {return d.abbr});
 
+    // Add text to circles
     chartGroup.selectAll("#circleText")
     .data(importedData)
     .enter()
@@ -120,13 +116,40 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     //   // .attr("class", "axisText")
     //   .text("In Poverty");
 
+    // Create axes labels
+    // chartGroup.append("text")
+    //   .attr("transform", "rotate(-90)")
+    //   .attr("y", 0 - chartMargin.left + 40)
+    //   .attr("x", 0 - (chartHeight / 2))
+    //   .attr("dy", "1em")
+    //   .attr("class", "axisText")
+    //   .text("In Poverty");
+
+    // chartGroup.append("text")
+    //   .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top + 30})`)
+    //   .attr("class", "axisText")
+    //   .text("In Poverty");
+
+    // chartGroup.append("text")
+    // .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top + 20})`)
+    // .attr("text-anchor", "middle")
+    // .attr("font-size", "16px")
+    // .attr("fill", "green")
+    // .text("In poverty (%)");
+
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 40)
-      .attr("x", 0 - (height / 2))
+      .attr("y", 0 - chartMargin.left + 30)
+      .attr("x",0 - (chartHeight / 2))
       .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Lacks Healthcare (%)");  
+
+    chartGroup.append("text")
+      .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top - 50})`)
       .attr("class", "axisText")
-      .text("In Poverty");
+      .text("In Poverty (%)");
+
 
 
   }).catch(function(error) {
