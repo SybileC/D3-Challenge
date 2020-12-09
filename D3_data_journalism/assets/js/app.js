@@ -36,31 +36,44 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       // Parse data
       var abbr = importedData.map(d => d.abbr);
       console.log(abbr);
+      console.log("income")   
       var poverty = importedData.map(d => d.poverty);
-      console.log(poverty);
+      console.log("poverty")
+      console.log(poverty);
       var age = importedData.map(d => d.age);
       console.log(age);
       var income = importedData.map(d => d.income);
       console.log(income);
       var healthcare = importedData.map(d => d.healthcare);
-      console.log(healthcare);
+      console.log("healthcare")
+      console.log(healthcare);
       var obesity = importedData.map(d => d.obesity);
       console.log(obesity);
       var smokes = importedData.map(d => d.smokes);
       console.log(smokes);
 
+    importedData.forEach(function(data) {
+      data.income = +data.income;
+      data.healthcare = +data.healthcare;
+      data.poverty = +data.poverty;
+    });
+
 
     var xLinearScale = d3.scaleLinear()
-    .domain(d3.extent(importedData, d => d.income))
+    .domain([5, d3.max(importedData, d => d.poverty)])
     // .domain([0, d3.max(importedData, d => d.healthcare)])
     .range([0, chartWidth]);
 
     var yLinearScale = d3.scaleLinear()
+    // .domain([0, 33])
     .domain([0, d3.max(importedData, d => d.healthcare)])
     // .domain(d3.extent(importedData, d => d.healthcare))
     .range([chartHeight, 0]);
     // .range([0, chartHeight]);
+    // .range([chartHeight - chartMargin.bottom, chartMargin.top]
 
+    // console.log(d3.max(d.healthcare));
+    
     var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
 
@@ -77,16 +90,42 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .enter()
     .append("circle")
     .classed("scatter", true)
-    .attr("cx", d => xLinearScale(d.income))
+    .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
     .attr("fill", "blue")
     .attr("opacity", ".5");
-    // .text(function (d) { return d.abbr; });
+    // .text(function(d) {return d.abbr});
 
-    circlesGroup.append("text")
-    .attr("dx", function(d){return -20})
-    .text(function(d){return d.abbr});
+    chartGroup.selectAll("#circleText")
+    .data(importedData)
+    .enter()
+    .append("text")
+    .attr("dx", d => xLinearScale(d.poverty) - 12)
+    .attr("dy", d => yLinearScale(d.healthcare) + 5)
+    .text(d => d.abbr);
+
+    // Create axes labels
+    // chartGroup.append("text")
+    //   .attr("transform", "rotate(-90)")
+    //   .attr("dy", 700)
+    //   .attr("dx", 700)
+    //   // .attr("dy", "1em")
+    //   .attr("class", "axisText")
+    //   .text("Lacks Healthcare");
+
+    // chartGroup.append("text")
+    //   .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+    //   // .attr("class", "axisText")
+    //   .text("In Poverty");
+
+    chartGroup.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 40)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .attr("class", "axisText")
+      .text("In Poverty");
 
 
   }).catch(function(error) {
