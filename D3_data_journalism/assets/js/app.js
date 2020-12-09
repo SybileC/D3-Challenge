@@ -34,23 +34,30 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       console.log(importedData);
       
       // Parse data
+      var state = importedData.map(d => d.state);
+      console.log("state");
+      console.log(state);
       var abbr = importedData.map(d => d.abbr);
-      console.log(abbr);
-      console.log("income")   
+      console.log("abbr");
+      console.log(abbr);  
       var poverty = importedData.map(d => d.poverty);
-      console.log("poverty")
+      console.log("poverty");
       console.log(poverty);
       var age = importedData.map(d => d.age);
+      console.log("age");
       console.log(age);
       var income = importedData.map(d => d.income);
-      console.log(income);
+      console.log("income")
+      console.log(income);
       var healthcare = importedData.map(d => d.healthcare);
-      console.log("healthcare")
+      console.log("healthcare");
       console.log(healthcare);
       var obesity = importedData.map(d => d.obesity);
-      console.log(obesity);
+      console.log("obesity");
+      console.log(obesity);
       var smokes = importedData.map(d => d.smokes);
-      console.log(smokes);
+      console.log("smokes");
+      console.log(smokes);
 
     importedData.forEach(function(data) {
       data.income = +data.income;
@@ -107,11 +114,15 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       .attr("x",0 - (chartHeight / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
+      .attr("font-size", "16 px")
+      .attr("font-weight", 700)
       .text("Lacks Healthcare (%)");  
 
     chartGroup.append("text")
       .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top - 50})`)
-      .attr("class", "axisText")
+      .style("text-anchor", "middle")
+      .attr("font-size", "16 px")
+      .attr("font-weight", 700)
       .text("In Poverty (%)");
 
 
