@@ -59,7 +59,8 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       console.log("smokes");
       console.log(smokes);
 
-    importedData.forEach(function(data) {
+    // Turn strings to intergers/floats
+      importedData.forEach(function(data) {
       data.income = +data.income;
       data.healthcare = +data.healthcare;
       data.poverty = +data.poverty;
