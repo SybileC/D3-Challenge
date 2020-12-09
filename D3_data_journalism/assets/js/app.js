@@ -81,12 +81,12 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
     .attr("fill", "blue")
-    .attr("opacity", ".5")
-    .text(d => d.abbr);
+    .attr("opacity", ".5");
+    // .text(function (d) { return d.abbr; });
 
-    // chartGroup.append("text")
-    // .attr("dx", function(d){return -20})
-    // .text(function(d){return d.abbr})
+    circlesGroup.append("text")
+    .attr("dx", function(d){return -20})
+    .text(function(d){return d.abbr});
 
 
   }).catch(function(error) {
