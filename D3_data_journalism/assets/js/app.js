@@ -93,7 +93,7 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
-    .attr("fill", "blue")
+    .attr("fill", "green")
     .attr("opacity", ".5");
     // .text(function(d) {return d.abbr});
 
@@ -103,6 +103,7 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .append("text")
     .attr("dx", d => xLinearScale(d.poverty) - 12)
     .attr("dy", d => yLinearScale(d.healthcare) + 5)
+    .attr("stroke", "white")
     .text(d => d.abbr);
 
     // Create axes labels
