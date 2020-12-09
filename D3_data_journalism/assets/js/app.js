@@ -5,8 +5,6 @@ var svgWidth = 960;
 var svgHeight = 660;
 
 // Define the chart's margins as an object
-// 
-
 var chartMargin = {
   top: 100,
   right: 100,
@@ -103,40 +101,6 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     .text(d => d.abbr);
 
     // Create axes labels
-    // chartGroup.append("text")
-    //   .attr("transform", "rotate(-90)")
-    //   .attr("dy", 700)
-    //   .attr("dx", 700)
-    //   // .attr("dy", "1em")
-    //   .attr("class", "axisText")
-    //   .text("Lacks Healthcare");
-
-    // chartGroup.append("text")
-    //   .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
-    //   // .attr("class", "axisText")
-    //   .text("In Poverty");
-
-    // Create axes labels
-    // chartGroup.append("text")
-    //   .attr("transform", "rotate(-90)")
-    //   .attr("y", 0 - chartMargin.left + 40)
-    //   .attr("x", 0 - (chartHeight / 2))
-    //   .attr("dy", "1em")
-    //   .attr("class", "axisText")
-    //   .text("In Poverty");
-
-    // chartGroup.append("text")
-    //   .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top + 30})`)
-    //   .attr("class", "axisText")
-    //   .text("In Poverty");
-
-    // chartGroup.append("text")
-    // .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top + 20})`)
-    // .attr("text-anchor", "middle")
-    // .attr("font-size", "16px")
-    // .attr("fill", "green")
-    // .text("In poverty (%)");
-
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - chartMargin.left + 30)
