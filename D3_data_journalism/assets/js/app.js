@@ -95,4 +95,8 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
     // .attr("dx", function(d){return -20})
     // .text(function(d){return d.abbr})
 
+
+  }).catch(function(error) {
+    console.log(error);
+
 });
