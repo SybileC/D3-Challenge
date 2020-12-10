@@ -23,8 +23,7 @@ var svg = d3
   .attr("height", svgHeight)
   .attr("width", svgWidth);
 
-// Append a group to the SVG area and shift ('translate') it to the right and down to adhere
-// to the margins set in the "chartMargin" object.
+// Append a group to the SVG area 
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
@@ -59,7 +58,7 @@ d3.csv("assets/data/data.csv").then(function(importedData) {
       console.log("smokes");
       console.log(smokes);
 
-    // Turn strings to intergers/floats
+    // Turn strings into intergers/floats
       importedData.forEach(function(data) {
       data.income = +data.income;
       data.healthcare = +data.healthcare;
